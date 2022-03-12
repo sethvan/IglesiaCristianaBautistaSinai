@@ -4,7 +4,7 @@ const estudios = require("../controllers/estudios");
 const creencias = require("../controllers/creencias");
 const eventos = require("../controllers/eventos");
 const catchAsync = require("../utils/catchAsync");
-const { requireLogin } = require("../middleware");
+const { requireLogin, isDeletable } = require("../middleware");
 const admin = require("../controllers/admin");
 
 router
@@ -16,7 +16,7 @@ router
   .route("/_estudios/:id")
   .get(catchAsync(estudios.showEstudio))
   .put(requireLogin, catchAsync(estudios.updateEstudio))
-  .delete(requireLogin, catchAsync(estudios.deleteEstudio));
+  .delete(requireLogin, isDeletable, catchAsync(estudios.deleteEstudio));
 
 router
   .route("/_creencias")

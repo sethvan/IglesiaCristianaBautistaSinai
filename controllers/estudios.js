@@ -1,10 +1,10 @@
 const Editor = require("../models/editor");
 
 module.exports.index = async (req, res, next) => {
-  const estudios = await Editor.find({ kind: "estudios" });
+  const editors = await Editor.find({});
   const isAdminView = !!req.session.admin_id;
-  estudios.sort((a, b) => b.date - a.date);
-  res.send({ estudios, isAdminView });
+  editors.sort((a, b) => b.date - a.date);
+  res.send({ editors, isAdminView });
 };
 
 module.exports.showEstudio = async (req, res, next) => {
@@ -13,9 +13,7 @@ module.exports.showEstudio = async (req, res, next) => {
   const editor = await Editor.findById(id);
   if (!editor) {
     console.log("Estudio does not exist");
-    // req.flash("error", "Cannot Find That Estudio!");
-    //have to return here so as not to render show
-    return res.redirect("http://localhost:3000/estudios");
+    // needs something here
   }
   res.send({ editor, isAdminView });
 };

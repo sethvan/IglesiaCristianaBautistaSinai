@@ -10,8 +10,11 @@ const ExpressError = require("./utils/ExpressError");
 const path = require("path");
 const routes = require("./routes/routes");
 const Admin = require("./models/admin");
-const port = process.env.NODE_ENV !== "production" ? 5000 : 80;
-const DB_URL = process.env.DB_URL;
+const port = 5000;
+const DB_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.DB_URL
+    : "mongodb://localhost:27017/iglesiasinai";
 const SECRET = process.env.SECRET;
 const ADMIN_NAME = process.env.ADMIN_NAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
@@ -76,13 +79,14 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 app.use(routes);
+
 app.use(express.static(path.join(__dirname, "build")));
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-//app.all() is for every request and '*' is for every single path
-//this needs to be down here so as it catches whatever is left
+// app.all() is for every request and '*' is for every single path
+// this needs to be down here so as it catches whatever is left
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
 });

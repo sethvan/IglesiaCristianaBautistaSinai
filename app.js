@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config(); //line needed when developing locally in order to use environment variables
-}
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const session = require("express-session");

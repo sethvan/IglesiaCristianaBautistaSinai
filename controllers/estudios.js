@@ -1,4 +1,4 @@
-const Editor = require("../models/editor");
+const Editor = require("./models/editor");
 
 module.exports.index = async (req, res, next) => {
   const editors = await Editor.find({});
@@ -13,7 +13,7 @@ module.exports.showEstudio = async (req, res, next) => {
   const editor = await Editor.findById(id);
   if (!editor) {
     console.log("Estudio does not exist");
-    // needs something here
+    res.redirect("/estudios");
   }
   res.send({ editor, isAdminView });
 };

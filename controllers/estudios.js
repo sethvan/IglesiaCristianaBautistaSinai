@@ -1,4 +1,4 @@
-const Editor = require("./models/editor");
+const Editor = require("../models/editor");
 
 module.exports.index = async (req, res, next) => {
   const editors = await Editor.find({});

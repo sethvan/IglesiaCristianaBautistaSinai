@@ -1,4 +1,4 @@
-const Editor = require("./models/editor");
+const Editor = require("../models/editor");
 
 module.exports.showCreencias = async (req, res, next) => {
   const isAdminView = !!req.session.admin_id;

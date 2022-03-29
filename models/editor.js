@@ -1,7 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const kind = ["estudios", "creencias", "eventos", "bienvenidos", "sermones"];
+const kind = [
+  "estudios",
+  "creencias",
+  "eventos",
+  "bienvenidos",
+  "sermones",
+  "predicaciones",
+];
 
 const EditorSchema = new Schema({
   title: {
